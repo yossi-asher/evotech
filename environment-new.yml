@@ -1,0 +1,6 @@
+name: new
+dependencies:
+  - python=3.8
+  - pip
+  - pip:
+      - protobuf==4.21.6
