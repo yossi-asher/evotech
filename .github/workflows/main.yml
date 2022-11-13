@@ -1,22 +1,27 @@
-name: Update AUTHORS
+name: EvoTech Bot
 on:
   push:
     branches:
       - main
+env:
+  package: protobuf
+  old_version: 3.20.0
+  new_version: 4.21.6
+  
 jobs:
-  updateAuthors:
+  evotech_bot:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - name: Update AUTHORS
+      - name: EvoTech Bot
         run: |
           git log --format='%aN <%aE>%n%cN <%cE>' | sort -u > AUTHORS
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
-          commit-message: update authors
-          title: Update AUTHORS
-          body: Credit new contributors by updating AUTHORS
-          branch: update-authors
+          commit-message: update package - by evotech bot
+          title: EvoTech Bot
+          body: Update Package ${{ env.package }} By EvoTech Bot
+          branch: evotech-bot-update-package-${{ env.package }}
