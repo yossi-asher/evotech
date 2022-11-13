@@ -1,3 +1,4 @@
+import os\nos.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'
 
 import pkg_resources
 protobuf_version = [i.version for i in pkg_resources.working_set if i.key == 'protobuf'][0]
