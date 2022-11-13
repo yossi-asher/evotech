@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
       - name: EvoTech Bot
         run: |
-          x=`echo "import os\nos.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'"; cat simple_demo.py`
+          x=`echo "import os"; echo "os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'"; cat simple_demo.py`
           echo "$x" > simple_demo.py
       - name: Build site assets
         working-directory: ${{ github.workspace }}
