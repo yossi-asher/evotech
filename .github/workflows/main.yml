@@ -19,7 +19,7 @@ jobs:
         run: |
           x=`echo "import os"; echo "os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'"; cat simple_demo.py`
           echo "$x" > simple_demo.py
-          sed -i 's/protobuf==3.20.0/protobuf==4.21.6/g' environment.yml
+          sed -i 's/${{ env.package }}==${{ env.old_version }}/${{ env.package }}==${{ env.new_version }}/g' environment.yml
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
