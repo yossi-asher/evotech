@@ -1,12 +1,16 @@
 name: EvoTech Bot
 on:
-  push:
-    branches:
-      - main
-env:
-  package: protobuf
-  old_version: 3.20.0
-  new_version: 4.21.6
+  workflow_dispatch:
+    inputs:
+      package:
+        required: true
+        default: 'protobuf'
+      old_version:
+        required: true
+        default: '3.20.0'
+      new_version:
+        required: true
+        default: '4.21.6'
   
 jobs:
   evotech_bot:
@@ -19,11 +23,11 @@ jobs:
         run: |
           x=`echo "import os"; echo "os.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'"; cat simple_demo.py`
           echo "$x" > simple_demo.py
-          sed -i 's/${{ env.package }}==${{ env.old_version }}/${{ env.package }}==${{ env.new_version }}/g' environment.yml
+          sed -i 's/${{ github.event.inputs.package }}==${{ github.event.inputs.old_version }}/${{ github.event.inputs.package }}==${{ github.event.inputs.new_version }}/g' environment.yml
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
           commit-message: update package - by evotech bot
           title: EvoTech Bot
-          body: Update Package "${{ env.package }}" By EvoTech Bot
-          branch: evotech-bot-update-package-${{ env.package }}
+          body: Update Package "${{ github.event.inputs.package }}" By EvoTech Bot
+          branch: evotech-bot-update-package-${{ github.event.inputs.package }}
