@@ -17,8 +17,8 @@ jobs:
           fetch-depth: 0
       - name: EvoTech Bot
         run: |
-          # x=`echo "import os\nos.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'"; cat file`
-          git log --format='%aN <%aE>%n%cN <%cE>' | sort -u > AUTHORS
+          x=`echo "import os\nos.environ['PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION'] = 'python'"; cat simple_demo.py`
+          echo "$x" > simple_demo.py
       - name: Build site assets
         working-directory: ${{ github.workspace }}
         run: ls -la
